@@ -633,9 +633,42 @@ class ProductController extends BackendController
 							
 						}	
  					}
-					$product_img->save();
-					
-				}				
+					if($product_img->save()){
+						$model_var = new VarientProduct();
+						$model_var->product_id = $product_img->product_id;
+						$model_var->color = $product_img->color;
+						$modeldata = VarientProduct::find()->where(['color'=> $color , 'product_id' => $id ])->all();
+						if(!$modeldata){
+							$product = Product::find()->where(['id' => $model_var->product_id ])->one();
+							$group = Sizewidth::findOne($product->size_width_id);
+
+							$sizes = unserialize($group->size);
+							$widths = unserialize($group->width);
+
+							foreach($sizes as $size){
+								foreach($widths as $width){
+									$varmodel = new VarientProduct();
+									$searchvarient = VarientProduct::find()->where(['color'=>$color,'width'=>$width,'size'=>$size,'product_id'=>$model_var->product_id])->one();
+									 if ($searchvarient !== null)
+										continue;
+									
+									$colormodel = DropdownValues::findOne($color);
+									$widthmodel = DropdownValues::findOne($width);
+									$sizemodel = DropdownValues::findOne($size);
+									$varmodel->color = $color;
+									$varmodel->colors = 'red';
+									$varmodel->width = $width;
+									$varmodel->quantity = $product->quantity;
+									$varmodel->size = $size;
+									$varmodel->product_id = $model_var->product_id;
+									$varmodel->price = 0;
+									$varmodel->sku = $product->article_id.'-'.$colormodel->name.'-'.$widthmodel->name.'-'.$sizemodel->name;
+									$varmodel->save();
+								}
+							}
+						}				
+					}
+				}
 			}
 			if($file){
 				$filename = 'Data.'.$file->extension;

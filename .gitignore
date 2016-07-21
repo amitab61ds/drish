@@ -20,7 +20,6 @@ Thumbs.db
 /_protected/backend/runtime
 /assets
 /backend/assets
-/uploads
 /_protected/vendor
 
 # composer itself is not needed
