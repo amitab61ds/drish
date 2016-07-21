@@ -25,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn','header'=>'Sr.No.'],
 
-            'product_id',
 			[
 				'attribute' => 'color',
 				'format' => 'html',
@@ -61,6 +60,27 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'contentOptions' => ['style' => 'width:200px;height:100px;text-align:left;vertical-align: middle;'],
 			],
+			[
+				'attribute' => 'status',
+				'value' => function ($model) {
+					if ($model->status) {
+						return Html::a(Yii::t('app', 'Active'), null, [
+							'class' => 'btn btn-success status',
+							'data-id' => $model->id,
+							'href' => 'javascript:void(0);',
+						]);
+					} else {
+						return Html::a(Yii::t('app', 'Inactive'), null, [
+							'class' => 'btn btn-danger status',
+							'data-id' => $model->id,
+							'href' => 'javascript:void(0);',
+						]);
+					}
+				},
+				'contentOptions' => ['style' => 'width:160px;text-align:center'],
+				'format' => 'raw',
+				'filter'=>array("1"=>"Active","0"=>"Inactive"),
+			],
             // 'home_image',
             // 'other_image:ntext',
             // 'flip_image1',
@@ -77,9 +97,17 @@ $this->params['breadcrumbs'][] = $this->title;
 					], []);
 					return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['product-images/update','id'=> $model->id , 'product_id'=> $model->product_id], $options);
 					},
+					 'viewitems' =>function ($url, $model, $key) {
+						$options = array_merge([
+							'title' => Yii::t('yii', 'View Items'),
+							'aria-label' => Yii::t('yii', 'View Items'),
+							'data-pjax' => '0',
+						], []);
+						return Html::a('<span class="glyphicon glyphicon-folder-open"></span>', ['varient-product/color-index','id'=>$model->product_id , 'color' => $model->color], $options);
+					},
 				],
-				'template' => '{update} {delete}', 'contentOptions' => ['style' => 'width:160px;text-align:center'],
-				 'contentOptions' => ['style' => 'text-align:center;vertical-align: middle;letter-spacing:10px;'],
+				'template' => '{update}{viewitems} ', 'contentOptions' => ['style' => 'width:160px;text-align:center'],
+				 'contentOptions' => ['style' => 'text-left:center;margin-left:10px;vertical-align: middle;letter-spacing:10px;'],
 			 ],
         ],
     ]); ?>

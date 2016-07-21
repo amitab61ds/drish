@@ -171,7 +171,7 @@ class WomenPageSettingController extends Controller
 			
 			if($banner1 != '')
 			{
-					$name = time().'_banner';
+					$name = rand(10,10000).'_banner';
 					$size = Yii::$app->params['folders']['size'];
 					$main_folder = "banner";
 					$image_name= $this->uploadImage($banner1,$name,$main_folder,$size);
@@ -181,7 +181,7 @@ class WomenPageSettingController extends Controller
 			}
 			if($banner2 != '')
 			{
-					$name = time().'_banner';
+					$name = rand(10,10000).'_banner';
 					$size = Yii::$app->params['folders']['size'];
 					$main_folder = "banner";
 					$image_name1= $this->uploadImage($banner2,$name,$main_folder,$size);
@@ -191,7 +191,7 @@ class WomenPageSettingController extends Controller
 			}
 			if($banner3 != '')
 			{
-					$name = time().'_banner';
+					$name = rand(10,10000).'_banner';
 					$size = Yii::$app->params['folders']['size'];
 					$main_folder = "banner";
 					$image_name2= $this->uploadImage($banner3,$name,$main_folder,$size);
@@ -201,7 +201,7 @@ class WomenPageSettingController extends Controller
 			}
 			if($banner4 != '')
 			{
-					$name = time().'_banner';
+					$name = rand(10,10000).'_banner';
 					$size = Yii::$app->params['folders']['size'];
 					$main_folder = "banner";
 					$image_name3= $this->uploadImage($banner4,$name,$main_folder,$size);
@@ -211,7 +211,7 @@ class WomenPageSettingController extends Controller
 			}
 			if($banner5 != '')
 			{
-					$name = time().'_banner';
+					$name = rand(10,10000).'_banner';
 					$size = Yii::$app->params['folders']['size'];
 					$main_folder = "banner";
 					$image_name4= $this->uploadImage($banner5,$name,$main_folder,$size);
@@ -221,7 +221,7 @@ class WomenPageSettingController extends Controller
 			}
 			if($banner6 != '')
 			{
-					$name = time().'_banner';
+					$name = rand(10,10000).'_banner';
 					$size = Yii::$app->params['folders']['size'];
 					$main_folder = "banner";
 					$image_name5= $this->uploadImage($banner6,$name,$main_folder,$size);
@@ -237,7 +237,7 @@ class WomenPageSettingController extends Controller
 			$model->banner6 = serialize($model->banner61);
 			$model->save();
             Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Settings has been Updated successfully!'));
-			return $this->redirect(['update', 'id' => 1]);
+			return $this->redirect(['update', 'id' => $id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

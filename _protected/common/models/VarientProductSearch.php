@@ -39,11 +39,13 @@ class VarientProductSearch extends VarientProduct
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$id=0)
+    public function search($params,$id=0,$color=0)
     {
         $query = VarientProduct::find();
         if($id) {
             $query->where(['product_id' => $id]);
+        }if($color) {
+            $query->where(['color' => $color]);
         }
 
 

@@ -4,10 +4,16 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\WomenPageSetting */
-
+if($model->id == 2){
+	$this->title = 'Men Page Setting: ';
+	$this->params['breadcrumbs'][] = ['label' => 'Men Page Listing', 'url' => ['update?id=2']];
+	$this->params['breadcrumbs'][] = 'Update';	
+}else{
 $this->title = 'Women Page Setting: ';
-$this->params['breadcrumbs'][] = ['label' => 'Women Page Settings', 'url' => ['index']];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => 'Women Page Listing', 'url' => ['update?id=1']];
+$this->params['breadcrumbs'][] = 'Update';	
+}
+
 ?>
 <div class="pages-index">
 	<div class="row">

@@ -1,39 +1,47 @@
 <?php
 use common\models\Product;
 use yii\helpers\Url;
-if($slides){
+if($women_model){
 ?> 
  <div data-ride="carousel" class="carousel slide" id="myCarousel-shoes">
     <!-- Indicators -->
      <ol class="carousel-indicators carousel-indicators-2">
 		 <?php $i=0;
-		  foreach($slides as $slide){  ?>
-			  <li class="<?php if($i==0){ echo 'active'; }?>" data-slide-to="<?= $i ?>" data-target="#myCarousel-shoes"></li>
-		<?php  $i++;  }					 
+			foreach($women_model as $key => $value ){
+				if($i!=0 && $value != ""){?>
+					 <li class="<?php if($i==0){ echo 'active'; }?>" data-slide-to="<?= $i ?>" data-target="#myCarousel-shoes"></li>
+			<?php }
+			$i++;
+			}					 
 		 ?>
      </ol>
     <!-- Wrapper for slides -->
-        <div role="listbox" class="carousel-inner">
-		 <?php $j=1;
-		 foreach($slides as $slide){  
-		 ?>
+    <div role="listbox" class="carousel-inner">
+		 <?php $j=0;
+		foreach($women_model as $key => $value){
+			$slide ="";
+			if($j !=0 && $value != ""){	
+			$slide = unserialize($value);
+		?>
             <div class="item <?php if($j==1){ echo 'active'; }?>">
-				<img class="img-responsive"  src="<?= Yii::$app->params['baseurl']."/uploads/slides/main/".$slide->image_path ?>" alt="<?= $slide->alt_title ?>" title="<?= $slide->name ?>">
+				<img class="img-responsive"  src="<?= Yii::$app->params['baseurl']."/uploads/banner/main/".$slide[3] ?>" alt="<?= $slide[0] ?>" title="<?= $slide[0] ?>">
 				<div class="carousel-caption">
 					<div class="price-frame">
-						<h4><?= $slide->name ?></h4>
-						<p class="price-txt"><?= $slide->content ?></p>
-						<a href="<?= $slide->button_link ?>">
+						<h4><?= $slide[0] ?></h4>
+						<p class="price-txt"><?= $slide[1] ?></p>
+						<a href="<?= $slide[2] ?>">
 						<input type="button" class="shop-now-btn" value="Shop Now &gt;">
 					</a>
 					</div>
 				  <!--end price-frame-->
 			   </div>
             </div>
-		<?php $j++;	
+		<?php 
 			}
+		$j++;	
+		}
 		?>
-        </div>
+    </div>
 	 <!-- Left and right controls -->
 		<a data-slide="prev" role="button" href="#myCarousel-shoes" class="left carousel-control">
 		<span aria-hidden="true" class="slide-arrow-left-2"><img alt="arrow" src="images/left-arrow.jpg"></span>

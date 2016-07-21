@@ -74,14 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ], []);
                                         return Html::a('<span class="glyphicon glyphicon-folder-open"></span>', ['varient-product/index','id'=>$model->id], $options);
                                     },
-                                    'generate' =>function ($url, $model, $key) {
-                                        $options = array_merge([
-                                            'title' => Yii::t('yii', 'Generate Items'),
-                                            'aria-label' => Yii::t('yii', 'Generate Items'),
-                                            'data-pjax' => '0',
-                                        ], []);
-                                        return Html::a('<span class="glyphicon glyphicon-cog"></span>', ['product/generate','id'=>$model->id], $options);
-                                    },
+                                    
 									'viewimages' =>function ($url, $model, $key) {
 										$options = array_merge([
 										'title' => Yii::t('yii', 'View Product Images'),

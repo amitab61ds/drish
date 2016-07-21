@@ -15,7 +15,7 @@ use common\traits\ImageUploadTrait;
 /**
  * ProductImagesController implements the CRUD actions for ProductImages model.
  */
-class ProductImagesController extends Controller
+class ProductImagesController extends BackendController
 {
 	use ImageUploadTrait;
 	public $enableCsrfValidation = false;
@@ -239,7 +239,9 @@ class ProductImagesController extends Controller
 			}else{
 				$model->other_image = $data->other_image;
 			}
-			$model->save();
+			if($model->save()){
+				return $this->redirect(['/product/generate', 'id' => $product_id, 'color' => $model->color]);
+			}
 			Yii::$app->getSession()->setFlash('success', Yii::t('app', "Congratulations! your Images Has been Updated Succcessfully."));
             return $this->redirect(['viewimages', 'product_id' => $product_id]);
         } else {

@@ -260,13 +260,16 @@ $(document).ready(function(){
 
 
 			var topval = $(this).scrollTop();
-			if(winheight > 767 ){
+			function SliderDiv(){
 				var winheight = jQuery(window).height();
 				var head_height = jQuery(".free-shipping").height();
 				var newheight = winheight - head_height;
 				$('.slider-area').css('margin-top',head_height);
 				$('.bx-viewport').css('height',newheight);
 				$('.imgs').css('height',newheight);
+			}
+			if(jQuery(window).width() > 767 ){
+				SliderDiv();
 			}
 
 

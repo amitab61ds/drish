@@ -3,27 +3,28 @@ use frontend\widgets\ProductsSlider;
 use frontend\widgets\ProductsFeatured;
 use frontend\widgets\OfferSlider;
 ?>
-<div class="container-fluid">
+			<div class="container-fluid">
                <div class="row">
                   <div class="col-lg-12 col-padding">
-                     <div class="full-slide">
+                    <div class="full-slide">
                         <?= ProductsSlider::widget(['type'=>"men"]); ?>
-                     </div>
+                    </div>
+					<div class="full-slide"> 
+                      <?= ProductsFeatured::widget(['type'=>"men"]); ?>
+					</div>
                   </div>
                   <!--end col-lg-12-->
                </div>
                <!--end row--->
-                <div class="full-slide"> 
-                      <?= ProductsFeatured::widget(['type'=>"men"]); ?>
-               </div>
+                
                <!--end row-->     
             </div>
             <!-- gallery start-->
             <div class="gallery">
                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 col-padding">
-                <div class="gallery-bg">
-                 <img src="<?= Yii::$app->params['baseurl'] ?>/images/gallery-bg.jpg" class="img-responsive">
-                </div><!--end gallery-bg-->
+					<div class="gallery-bg">
+						<img src="<?= Yii::$app->params['baseurl'] ?>/images/gallery-bg.jpg" class="img-responsive">
+					</div><!--end gallery-bg-->
                
                     <div class="shop-faq-bg">
                     	<img src="<?= Yii::$app->params['baseurl'] ?>/images/shop-faq-bg.jpg" class="img-responsive">
@@ -43,9 +44,9 @@ use frontend\widgets\OfferSlider;
                       
                 </div><!--end col-lg-7-->
                <!--end col-lg-7-->
-               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 col-padding">
+				<div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 col-padding">
                    <?= OfferSlider::widget(); ?>
-				 </div>
+				</div>
                <!--end col-lg-5-->
             </div>
             <!-- gallery end-->

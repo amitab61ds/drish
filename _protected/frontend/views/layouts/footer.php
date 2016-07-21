@@ -61,7 +61,7 @@ use yii\helpers\Url;
 		<div class="pop-up-images">
 			<div class="row">
 				<?php
-				/* if(!Yii::$app->user->isGuest){
+				 if(!Yii::$app->user->isGuest){
 					$Wishlist = Wishlist::find()->where(['client_id' => \Yii::$app->user->identity->id])->one();
 					if($Wishlist){
 					$wish_model = unserialize($Wishlist->products);
@@ -75,7 +75,7 @@ use yii\helpers\Url;
 									<?php if($i==1){ ?><p>ITEM</p> <?php } ?>
 									<div class='wish_div'>
 										<a href="<?= Url::to(["men/product","slug"=>$product->slug ]) ?>" class="item_product_image"> 
-										<img src="<?= Yii::$app->params['baseurl'] ?>/uploads/product/flip/<?= $product->id ?>/custom2/<?= $product->productImages->flip_image; ?>" alt="<?= $product->name ?>" title="<?= $product->name ?>" class="img-responsive">
+										<img src="<?= Yii::$app->params['baseurl'] ?>/uploads/product/flip/<?= $product->id ?>/medium/<?= $product->productImages->flip_image; ?>" alt="<?= $product->name ?>" title="<?= $product->name ?>" class="img-responsive">
 										</a><h5><a href="<?= Url::to(["men/product","slug"=>$product->slug ]) ?>" class="item_product_image"> <?= $product->name ?></a></h5>
 									</div>
 								</div>
@@ -96,7 +96,7 @@ use yii\helpers\Url;
 						echo "No Items";
 					}
 					}
-				} */
+				} 
 				?>
 			</div> 
 		</div>

@@ -33,6 +33,19 @@ class VarientProductController extends BackendController
             'id' => $id,
         ]);
     }
+	public function actionColorIndex($id=0,$color=0)
+    {
+        $searchModel = new VarientProductSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id ,$color );
+        $model = new VarientProduct();
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+            'id' => $id,
+            'color' => $color,
+        ]);
+    }
     /**
      * Displays a single VarientProduct model.
      * @param integer $id

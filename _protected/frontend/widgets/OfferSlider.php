@@ -3,15 +3,16 @@ namespace frontend\widgets;
 
 use Yii;
 use yii\base\Widget;
-use common\models\SliderImages;
+use common\models\WomenPageSetting;
 
 class OfferSlider extends Widget
 {
 	public function run()
     {
-		$slides = SliderImages::find()->where(['slider_id' => 83 ])->all();
+
+		$women_model = WomenPageSetting::find()->where(['id' => 2])->one();	
 		return $this->render('offer-slider', [
-			'slides' =>  $slides,
+			'women_model' =>  $women_model,
         ]);	
 	}
 }

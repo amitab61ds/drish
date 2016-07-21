@@ -740,52 +740,46 @@ class ProductController extends BackendController
 			return $this->render('upload',['model'=>$model]);
 		}
 	}
-    public function actionGenerate($id)
+    public function actionGenerate($id=0,$color=0)
     {
         $model = new VarientProduct();
         $model->product_id = $id;
+        $model->color = $color;
+		$modeldata = VarientProduct::find()->where(['color'=> $color , 'product_id' => $id ])->all();
+		if(!$modeldata){
+		$product = Product::findOne($id);
+		$group = Sizewidth::findOne($product->size_width_id);
 
+		$sizes = unserialize($group->size);
+		$widths = unserialize($group->width);
 
-
-        if ($model->load(Yii::$app->request->post())) {
-            $product = Product::findOne($id);
-            $group = Sizewidth::findOne($product->size_width_id);
-
-            $sizes = unserialize($group->size);
-            $widths = unserialize($group->width);
-
-            foreach($model->colors as $color){
-                foreach($sizes as $size){
-                    foreach($widths as $width){
-                        $varmodel = new VarientProduct();
-                        $searchvarient = VarientProduct::find()->where(['color'=>$color,'width'=>$width,'size'=>$size,'product_id'=>$model->product_id])->one();
-                         if ($searchvarient !== null)
-                            continue;
-						
-                        $colormodel = DropdownValues::findOne($color);
-                        $widthmodel = DropdownValues::findOne($width);
-                        $sizemodel = DropdownValues::findOne($size);
-                        $varmodel->color = $color;
-                        $varmodel->colors = 'red';
-                        $varmodel->width = $width;
-                        $varmodel->quantity = $product->quantity;
-                        $varmodel->size = $size;
-                        $varmodel->product_id = $model->product_id;
-                        $varmodel->price = 0;
-                        $varmodel->sku = $product->article_id.'-'.$colormodel->name.'-'.$widthmodel->name.'-'.$sizemodel->name;
-                        $varmodel->save();
-                    }
-                }
-            }
-
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', "Congratulations! items successfully created."));
-            return $this->redirect(['varient-product/index','id'=>$model->product_id]);
-        }else {
-            return $this->render('generate-items', [
-                'model' => $model,
-            ]);
-        }
-
+		foreach($sizes as $size){
+			foreach($widths as $width){
+				$varmodel = new VarientProduct();
+				$searchvarient = VarientProduct::find()->where(['color'=>$color,'width'=>$width,'size'=>$size,'product_id'=>$model->product_id])->one();
+				 if ($searchvarient !== null)
+					continue;
+				
+				$colormodel = DropdownValues::findOne($color);
+				$widthmodel = DropdownValues::findOne($width);
+				$sizemodel = DropdownValues::findOne($size);
+				$varmodel->color = $color;
+				$varmodel->colors = 'red';
+				$varmodel->width = $width;
+				$varmodel->quantity = $product->quantity;
+				$varmodel->size = $size;
+				$varmodel->product_id = $model->product_id;
+				$varmodel->price = 0;
+				$varmodel->sku = $product->article_id.'-'.$colormodel->name.'-'.$widthmodel->name.'-'.$sizemodel->name;
+				$varmodel->save();
+			}
+		}
+		Yii::$app->getSession()->setFlash('success', Yii::t('app', "Congratulations! items successfully created."));
+			return $this->redirect(['varient-product/color-index','id'=>$model->product_id , 'color'=>$color]);
+		}else{
+			Yii::$app->getSession()->setFlash('success', Yii::t('app', "Congratulations! items successfully created."));
+			return $this->redirect(['varient-product/color-index','id'=>$model->product_id , 'color'=>$color]);
+		}
     }
 
     /**

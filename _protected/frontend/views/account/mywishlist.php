@@ -52,7 +52,7 @@ $model = unserialize($wishlist->products);
 							<!-- end of left part of account list-->
 								 
 										  <tr>
-											<td><div class="wish-img"><img src="<?= Yii::$app->params['baseurl'] ?>/uploads/product/flip/<?= $product->id ?>/custom2/<?= $product->productImages->flip_image; ?>" alt="wishlist-shoe" title="wishlist-shoe"></div></td>
+											<td><div class="wish-img"><img src="<?= Yii::$app->params['baseurl'] ?>/uploads/product/flip/<?= $product->id ?>/medium/<?= $product->productImages->flip_image; ?>" alt="wishlist-shoe" title="wishlist-shoe"></div></td>
 											<td><h4><?= $product->name ?> </h4>    
 											<p><?= $product->descr ?></p>
 											</td>

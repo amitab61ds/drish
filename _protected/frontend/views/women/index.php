@@ -9,15 +9,22 @@ $banner41 = unserialize($women_model->banner4);
 $banner51 = unserialize($women_model->banner5);
 $banner61 = unserialize($women_model->banner6);
 ?>
-		
+		<div class="container-fluid">
+			<div class="row">
+			  <div class="col-lg-12 col-padding">
+				<div class="full-slide">
+					<?= ProductsSlider::widget(['type'=>"women"]); ?>
+				</div>
+				<div class="full-slide"> 
+				  <?= ProductsFeatured::widget(['type'=>"women"]); ?>
+				</div>
+			  </div>
+			  <!--end col-lg-12-->
+			</div>
+		   <!--end row-->     
+		</div>
         <!--end row--->
-		<div class="full-slide">
-            <?= ProductsFeatured::widget(['type'=>"women"]); ?>
-        </div>
-		<div class="full-slide">
-             <?= ProductsSlider::widget(['type'=>"women"]); ?>
-        </div>
-         	<!-- end of woman- shoes slide--> 
+        <!-- end of woman- shoes slide--> 
 	<section class="woman-shoes">
 	<div class="container-fluid woman-main">
     	<div class="row">
